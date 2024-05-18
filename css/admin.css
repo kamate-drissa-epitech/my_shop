@@ -1,0 +1,219 @@
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body,
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+p { 
+  margin-bottom: 0 !important;
+}
+.dash-container {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(221, 218, 218);
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.search-group {
+  border: 1px solid rgb(221, 218, 218);
+  width: 700px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 5px;
+  background-color: rgb(248, 248, 248);
+}
+
+.search-group input {
+  padding: 12px;
+  border: none;
+  outline: none;
+  width: 50%;
+  background-color: rgb(248, 248, 248);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+.header-right .profil {
+  display: flex;
+  position: relative;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profil .logout {
+  position: absolute;
+  align-self: flex-end;
+  display: none;
+  top: 70px;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: aliceblue;
+  border: 1px solid rgb(221, 218, 218);
+}
+
+.profil:focus .logout {
+  display: flex;
+}
+
+.notification-number,
+.emaiL-number {
+  position: relative;
+  top: -10px;
+  left: -20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  display: inline-block;
+  /* padding: 3px; */
+  font-size: 10px;
+  color: white;
+}
+
+.main {
+  display: flex;
+  height: 85vh;
+}
+.main .main-left {
+  width: 200px;
+  padding-top: 30px;
+  flex-direction: column;
+  display: flex;
+  gap: 50px;
+  height: 100%;
+  border-right: 1px solid rgb(221, 218, 218);
+}
+
+.type {
+  padding: 5px 10px;
+  transition: 0.5s;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+.type:hover {
+  background-color: rgb(215, 216, 218);
+}
+
+.section-title {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.title-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.users {
+  fill: blue;
+}
+.categories {
+  fill: orange;
+}
+.products {
+  fill: pink;
+}
+
+a {
+  text-decoration: none;
+  color: grey;
+}
+
+.type-content {
+  margin-top: -40px;
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dash-input {
+  width: 90%;
+  text-align: start;
+}
+.type-content div {
+  cursor: pointer;
+  color: grey;
+}
+
+.main-right {
+  padding: 30px;
+  width: 90%;
+}
+
+.main-right h3 {
+  font-size: 25px;
+}
+
+.users {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+
+.addBtn {
+  padding: 10px;
+  border: none;
+  background-color: orange;
+  color: white;
+  border-radius: 5px;
+  display: block;
+  font-size: 18px;
+  width: 150px;
+  cursor: pointer;
+}
+

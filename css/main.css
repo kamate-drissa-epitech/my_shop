@@ -1,0 +1,389 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/* Mobile display first */
+.icon {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.header {
+  padding-right: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.mobile-login-group {
+  display: none;
+  gap: 30px;
+  justify-content: space-between;
+  padding-left: 25px;
+  width: 100%;
+}
+
+.mobile-login-group .login {
+  background-color: rgb(228, 224, 224);
+  padding: 15px 10px;
+  text-align: center;
+  width: 200px;
+  border-radius: 5px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-top-left {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.navbar {
+  display: none;
+}
+.navbar .list-items {
+  display: flex;
+  list-style: none;
+  gap: 50px;
+}
+.header-top-right .login {
+  display: none;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.list-items .item,
+.header-top-right .login {
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.list-items .item:hover,
+.header-top-right .login:hover {
+  font-weight: 700;
+}
+
+.header-top-right {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.header-bottom {
+  display: flex;
+  padding: 0 0 0 25px;
+  flex-direction: column;
+  gap: 70px;
+}
+
+.search-group {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  font-weight: 500;
+}
+
+.search-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+.search-input {
+  border: none;
+  outline: none;
+  border-bottom: 3px solid black;
+  padding-bottom: 20px;
+  font-size: 18px;
+  width: 80%;
+  font-weight: 600;
+}
+input::placeholder {
+  color: black;
+  opacity: 1;
+}
+
+.search-group .author-infos {
+  display: none;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 3px solid black;
+  margin-left: -20px;
+  padding-left: 30px;
+}
+.search-group .author-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+}
+.search-group .author-name {
+  color: grey;
+  font-size: 14px;
+}
+
+.select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.select-group-for-desktop {
+  display: none;
+}
+
+.select-btn {
+  width: 100%;
+  padding: 10px 0 20px;
+  border: none;
+  background-color: white;
+  border-bottom: 1px solid lightgrey;
+  font-size: 18px;
+}
+
+option {
+  padding: 10px;
+}
+
+.main {
+  padding: 50px 20px;
+}
+
+.main .card-selected-desktop {
+  display: none;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 50px;
+}
+.card-container {
+  transition: 0.8s;
+  border: 1px solid transparent;
+}
+
+.card-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.card-product-infos {
+  padding: 15px 20px;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.card-description {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+}
+.card-product-name {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.card-product-price::before {
+  content: "$";
+}
+
+.card-product-type {
+  color: grey;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.card-icons {
+  display: flex;
+  justify-content: space-between;
+  margin: -20px 0;
+  align-items: center;
+}
+
+.footer {
+  padding: 30px 20px 50px;
+}
+.footer-container {
+  display: flex;
+  gap: 20px;
+}
+
+.pagination-btn {
+  padding: 15px 20px;
+  color: black;
+  cursor: pointer;
+  background-color: white;
+  transition: 0.8s;
+}
+
+.pagination-btn.first,
+.pagination-btn:hover {
+  background-color: black;
+  color: white;
+}
+
+.desktop-btn {
+  display: none;
+}
+
+.image-desktop {
+  display: none;
+}
+
+/* Desktop Display */
+
+@media screen and (min-width: 810px) {
+  body {
+    padding: 0 60px 60px;
+  }
+  .image-desktop {
+    display: block;
+  }
+  .mobile-login-group {
+    display: none;
+  }
+  .navbar {
+    display: block;
+  }
+  .header-top-right .login {
+    display: block;
+  }
+  .header-top-right .menu-icon {
+    display: none;
+  }
+  .header-bottom {
+    flex-direction: row;
+  }
+
+  .search-group .author-infos {
+    display: flex;
+  }
+  .select-group-for-desktop {
+    display: block;
+    width: 200px;
+  }
+  .select-group-top {
+    display: none;
+  }
+  .select-group-bottom {
+    display: none;
+  }
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-container:hover {
+    border-radius: 5px;
+    border: 1px solid rgb(202, 200, 200);
+    transform: scale(1.05);
+  }
+  .main .card-selected-desktop {
+    display: flex;
+    flex-direction: column;
+    box-shadow: none;
+    border: none;
+    transform: scale(1);
+    justify-content: space-between;
+  }
+  .card-selected-desktop .card-selected-title {
+    color: grey;
+    text-transform: uppercase;
+  }
+
+  .card-selected-price-range {
+    font-size: 18px;
+  }
+  .range-values {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -30px;
+  }
+  .range::before {
+    content: "$";
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+  }
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 5px;
+    border: none;
+    border-radius: 3px;
+    background: lightgrey;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: 2px solid black;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: white;
+    margin-top: -7.5px;
+  }
+
+  input[type="range"]::-moz-range-track {
+    background-color: lightgrey;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    border: 2px solid black;
+    border-radius: 50%;
+  }
+  /* .input-block {
+    display: flex;
+    justify-content: space-between;
+  } */
+
+  .circle-container {
+    position: relative;
+    top: -17.75%;
+    left: 96%;
+  }
+
+  div.circle {
+    z-index: 1;
+    height: 16.5px;
+    width: 16.5px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: white;
+  }
+
+  .desktop-btn {
+    display: block;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .mobile-login-group {
+    display: none;
+  }
+}
