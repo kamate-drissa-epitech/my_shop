@@ -4,6 +4,9 @@ include_once "../../db/productModel.php";
 $user = new userModel();
 $product = new productModel();
 
+// $user->createUser('kamate', 'kamate@gmail.com', password_hash('kamate', PASSWORD_BCRYPT), date('Y-m-d'),  1);
+// exit;
+
 
 $allUsers = $user->getALlUsers();
 
@@ -78,13 +81,14 @@ if ($_COOKIE['userEmail']) {
             <article class="main-right">
                 <div class="users">
                     <h3>Users</h3>
-                    <button class="addBtn">Add new user</button>
+                    <a class="addBtn" href="../signup.php?isAdmin=<?= $userFromDB['admin'] ?>">Add new user</a>
                     <table class="table table-striped ">
                         <thead class="table table-dark">
-                            <tr>
-                                <th>ID</th>
+                            <tr py-4>
+                                <th py-4>ID</th>
                                 <th>Username</th>
                                 <th>email</th>
+                                <th>ccreated_at</th>
                                 <th>admin</th>
                                 <th>Actions</th>
                             </tr>
@@ -92,9 +96,10 @@ if ($_COOKIE['userEmail']) {
                         <tbody>
                             <?php foreach ($allUsers as $user) : ?>
                                 <tr>
-                                    <td scope="row"><?= $user['id'] ?></td>
+                                    <td><?= $user['id'] ?></td>
                                     <td><?= $user['username'] ?></td>
                                     <td><?= $user['email'] ?></td>
+                                    <td><?= $user['created_at'] ?></td>
                                     <td><?= $user['admin'] ?></td>
                                     <td>
                                         <button type="button" class="btn btn-secondary">Edit</button>

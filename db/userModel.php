@@ -11,10 +11,11 @@ class userModel
         $this->pdo = $connect->connection();
     }
 
-    public function createUser($username, $email, $password, $isAdmin = 0)
+    public function createUser($username, $email, $password, $created_at, $isAdmin = 0)
     {
-        $query = $this->pdo->prepare("INSERT INTO users(username, email, password, admin) VALUES(?,?,?,?)");
-        $query->execute([$username, $email, $password, $isAdmin]);
+        
+        $query = $this->pdo->prepare("INSERT INTO users(username, email, password, created_at, admin) VALUES(?,?,?,?,?)");
+        $query->execute([$username, $email, $password, $created_at, $isAdmin]);
     }
 
     public function getUser($email)
@@ -40,11 +41,11 @@ class userModel
         // Admin can set user right
         if ($userFromDB['admin'] === 1) {
             $query = $this->pdo->prepare("UPDATE users SET username = ?, email = ?, password = ? , $isAdmin = ? WHERE email = ?");
-            $query->execute([$username, $email, $passwordHased, $isAdmin,$emailUserConnected]);
+            $query->execute([$username, $email, $passwordHased, $isAdmin, $emailUserConnected]);
             echo 'user Modified';
         } else {
             $query = $this->pdo->prepare("UPDATE users SET username = ?, email = ?, password = ? WHERE email = ?");
-            $query->execute([$username, $email, $passwordHased,$emailUserConnected]);
+            $query->execute([$username, $email, $passwordHased, $emailUserConnected]);
             echo 'user Modified';
         }
     }
@@ -52,12 +53,13 @@ class userModel
     function deleteUser($id)
     {
         // $emailUserConnected = $_COOKIE['email'];
-            $query = $this->pdo->prepare("DELETE FROM users WHERE id = ?");
-            $query->execute([$id]);
+        $query = $this->pdo->prepare("DELETE FROM users WHERE id = ?");
+        $query->execute([$id]);
     }
 
-    
-    public function getALlUsers(){
+
+    public function getALlUsers()
+    {
         $query = $this->pdo->prepare("SELECT * FROM users");
         $query->execute();
         $user = $query->fetchAll(PDO::FETCH_ASSOC);
