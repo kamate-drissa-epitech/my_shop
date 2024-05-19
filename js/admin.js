@@ -1,15 +1,6 @@
 const profil = document.querySelector(".profil");
 const logoutBtn = document.querySelector(".logout");
-const test = document.querySelector(".test");
-const mainRight = document.querySelector(".main-right");
-const allUsers = document.querySelector(".all-users");
-const addUser = document.querySelector(".add-user");
-const allCategories = document.querySelector(".all-categories");
-const addCategorie = document.querySelector(".add-categorie");
-const allProducts = document.querySelector(".all-product");
-const addProduct = document.querySelector(".add-product");
-const addform = document.querySelector(".addform");
-
+const successMessage = document.querySelector(".success-message");
 
 profil.addEventListener("click", function () {
   if (logoutBtn.style.display === "none") {
@@ -19,7 +10,9 @@ profil.addEventListener("click", function () {
   }
 });
 
-allUsers.addEventListener("click", function () {
-  addform.style.display = 'block'
-});
-
+//Disable success message after 5s
+if (successMessage) {
+  setTimeout(() => {
+    successMessage.style.display = "none";
+  }, 2000);
+}

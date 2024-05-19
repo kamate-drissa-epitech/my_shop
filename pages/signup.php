@@ -3,12 +3,20 @@ include_once "../db/userModel.php";
 
 $errorMessage = '';
 $successMessage = '';
-if (isset($_GET['isAdmin'])) {
-    $isAdmin = $_GET['isAdmin'];
-}
+$pdo = new userModel();
 // $pdo = new userModel();
 // $pdo->createUser('kamate', 'kamate@gmail.com', password_hash('kamate', PASSWORD_BCRYPT), 1);
 // exit;
+
+// get connected user to check if admin
+if (isset($_COOKIE['userEmail'])) {
+    $userConnected = $pdo->getUser($_COOKIE['userEmail']);
+    $isAdmin = $userConnected['admin'];
+}
+// Update user
+if (isset($_GET['email']) && isset($_GET['edit'])) {
+    $userToUpdate = $pdo->getUser($_GET['email']);
+}
 
 if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {
     $username = $_POST['username'];
@@ -17,7 +25,6 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
     $adminField = $_POST['admin'];
     //Verify if special characters are present
     $regex = preg_match("/^[a-zA-Z0-9]+$/", $password);
-    $pdo = new userModel();
 
     // //Email Erros
     $userFromDB = $pdo->getUser($email);
@@ -45,16 +52,18 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
 
 
     if (!$errorMessage) {
-        if (isset($isAdmin)) {
+        if (isset($isAdmin) && !isset($_GET['edit'])) {
             $pdo->createUser($username, $email, password_hash($password, PASSWORD_BCRYPT), date('Y-m-d'), $adminField);
-            header("Location: ./admin/admin.php", true, 302);
+            header("Location: ./admin/admin.php?userCreated=1", true, 302);
+        } elseif (isset($isAdmin) && isset($_GET['edit'])) {
+            $pdo->updateUser($username, $email, password_hash($password, PASSWORD_BCRYPT), $userToUpdate['created_at'], date('Y-m-d'), $adminField, $userToUpdate['email']);
+            header("Location: ./admin/admin.php?userUpdated=1", true, 302);
         } else {
             $userFromDB = $pdo->getUser($email);
             $pdo->createUser($username, $email, password_hash($password, PASSWORD_BCRYPT), date('Y-m-d'),);
-            setcookie('userEmail', strval($userFromDB['email']), time() + 3600, '/', false);
+            setcookie('userEmail', $email, time() + 3600, '/', false);
             header("Location: ../", true, 302);
         }
-        $successMessage = 'User create successful<br>';
     }
 }
 ?>
@@ -85,24 +94,24 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
             <h3 class="form-title">Sign Up</h3>
             <div class="name input-group">
                 <label for="name">name</label>
-                <input type="text" id="name" name="username" value="<?= $username ? $username : '' ?>">
+                <input type="text" id="name" name="username" value="<?= $userToUpdate ? $userToUpdate['username'] : '' ?>">
             </div>
             <div class="email input-group">
                 <label for="email">email</label>
-                <input type="text" id="email" name="email" value="<?= $email ? $email : '' ?>">
+                <input type="text" id="email" name="email" value="<?= $userToUpdate ? $userToUpdate['email'] : '' ?>">
             </div>
             <div class="password input-group">
                 <label for="password">password</label>
-                <input type="password" id="password" name="password" value="<?= $password ? $password : '' ?>">
+                <input type="password" id="password" name="password">
             </div>
-            <?php if (intval($_GET['isAdmin']) === 1) : ?>
+            <?php if ($isAdmin === 1) : ?>
                 <div class="admin input-group">
                     <label for="admin">isAdmin</label>
-                    <input type="number" id="admin" min="0" max="1" name="admin" onkeydown="return false">
+                    <input type="number" id="admin" min="0" value="<?= $userToUpdate ? $userToUpdate['admin'] : '' ?>" max="1" name="admin" onkeydown="return false">
                 </div>
             <?php endif; ?>
             <button class="register-btn">Register</button>
-            <?php if (intval($_GET['isAdmin']) !== 1) : ?>
+            <?php if ($isAdmin !== 1) : ?>
                 <div class="go-to-signup">Already have account? <a href="./signin.php">click here</a></div>
             <?php endif; ?>
         </div>

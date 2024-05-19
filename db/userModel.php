@@ -13,7 +13,7 @@ class userModel
 
     public function createUser($username, $email, $password, $created_at, $isAdmin = 0)
     {
-        
+
         $query = $this->pdo->prepare("INSERT INTO users(username, email, password, created_at, admin) VALUES(?,?,?,?,?)");
         $query->execute([$username, $email, $password, $created_at, $isAdmin]);
     }
@@ -27,27 +27,10 @@ class userModel
     }
 
 
-    function updateUser($username, $email, $password, $isAdmin = 0)
+    function updateUser($username, $email, $password, $created_at,  $update_at, $isAdmin = 0, $oldEmail)
     {
-        // Get all user infos from cookies and fill its input with that
-        // $emailUserConnected = $_COOKIE['email'];
-        $emailUserConnected = 'kone@gmail.com';
-        $userFromDB = $this->getUser($emailUserConnected);
-        // TO DO
-        // Set user values if something on inputs
-        // $username = isset($_POST['username']) ? $_POST['username'] : $userFromDB['username'];
-        //
-        $passwordHased = password_hash($password, PASSWORD_BCRYPT);
-        // Admin can set user right
-        if ($userFromDB['admin'] === 1) {
-            $query = $this->pdo->prepare("UPDATE users SET username = ?, email = ?, password = ? , $isAdmin = ? WHERE email = ?");
-            $query->execute([$username, $email, $passwordHased, $isAdmin, $emailUserConnected]);
-            echo 'user Modified';
-        } else {
-            $query = $this->pdo->prepare("UPDATE users SET username = ?, email = ?, password = ? WHERE email = ?");
-            $query->execute([$username, $email, $passwordHased, $emailUserConnected]);
-            echo 'user Modified';
-        }
+        $query = $this->pdo->prepare("UPDATE users SET username =?, email =?, password =?, created_at =?, updated_at =?, admin =? WHERE email =?");
+        $query->execute([$username, $email, $password, $created_at, $update_at, $isAdmin, $oldEmail]);
     }
 
     function deleteUser($id)

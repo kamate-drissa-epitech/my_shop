@@ -1,29 +1,31 @@
 const successMessage = document.querySelector(".success-message");
 const menuIcon = document.querySelector(".menu-icon");
 const mobileLoginGroup = document.querySelector(".mobile-login-group");
+const userConnected = document.querySelector(".user-connected");
+const logoutSettings = document.querySelector(".logout-settings");
 
 
-
-//Disable success message after 5s
-if (successMessage) {
-  setTimeout(() => {
-    successMessage.style.display = "none";
-  }, 5000);
-}
 
 // Toggle menu to display login group
 menuIcon.addEventListener("click", function () {
-  if ((mobileLoginGroup.style.display === "none")) {
+  console.log('clicked');
+  if (mobileLoginGroup.style.display === "none") {
     mobileLoginGroup.style.display = "flex";
-  }else{
+  } else {
     mobileLoginGroup.style.display = "none";
   }
 });
 
-
+userConnected.addEventListener("click", function () {
+  if (logoutSettings.style.display === "none") {
+    logoutSettings.style.display = "flex";
+  } else {
+    logoutSettings.style.display = "none";
+  }
+});
 
 // console.log(window.matchMedia("(max-width: 700px)").matches);
 
-if(window.matchMedia("(min-width: 810px)").matches){
+if (window.matchMedia("(min-width: 810px)").matches) {
   // TODO
 }

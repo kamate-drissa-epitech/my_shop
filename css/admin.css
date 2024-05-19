@@ -15,7 +15,7 @@ html {
   height: 30px;
   object-fit: cover;
 }
-p { 
+p {
   margin-bottom: 0 !important;
 }
 .dash-container {
@@ -63,8 +63,22 @@ p {
   padding: 12px;
   border: none;
   outline: none;
-  width: 50%;
+  width: 100%;
   background-color: rgb(248, 248, 248);
+}
+.error-message,
+.success-message {
+  background-color: rgb(255, 164, 164);
+  color: rgb(243, 37, 37);
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.success-message {
+  color: white;
+  background-color: rgb(54, 124, 54);
 }
 
 .header-right {
@@ -192,21 +206,32 @@ a {
 .main-right {
   padding: 30px;
   width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 .main-right h3 {
   font-size: 25px;
 }
 
-.users {
+.users,
+.categories {
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
+.users {
+  width: 70%;
+}
 
+.users-categories {
+  display: flex;
+  gap: 20px;
+}
 
 .addBtn {
-  padding: 10px;
+  padding: 10px 5px;
   border: none;
   background-color: orange;
   color: white;
@@ -222,10 +247,7 @@ a {
   color: white;
 }
 
-table th {
-  padding: 15px !important;
-}
+table th,
 table td {
   padding: 10px !important;
 }
-

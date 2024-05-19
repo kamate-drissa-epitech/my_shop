@@ -1,20 +1,38 @@
 <?php
 include_once "../../db/userModel.php";
 include_once "../../db/productModel.php";
+include_once "../../db/categorieModel.php";
 $user = new userModel();
 $product = new productModel();
+$category = new categorieModel();
+$successMessage = '';
 
 // $user->createUser('kamate', 'kamate@gmail.com', password_hash('kamate', PASSWORD_BCRYPT), date('Y-m-d'),  1);
 // exit;
 
 
 $allUsers = $user->getALlUsers();
+$allCategories = $category->getAllCategories();
 
-// Verify user type before geting in admin page
-$userFromDB = $user->getUser($_COOKIE['userEmail']);
+if ($_GET['categoryAdded']) {
+    $successMessage = "New category added";
+}
+if ($_GET['userCreated']) {
+    $successMessage = "User created succeffuly";
+}
+if ($_GET['userUpdated']) {
+    $successMessage = "User updated successfuly";
+}
+if ($_GET['userDeleted']) {
+    $successMessage = "User deleted successfuly";
+}
+
+
 
 if ($_COOKIE['userEmail']) {
-    if ($userFromDB['admin'] !== 1) {
+    // Verify user type before geting in admin page
+    $userFromCookies = $user->getUser($_COOKIE['userEmail']);
+    if ($userFromCookies['admin'] !== 1) {
         header("Location: ../../", true, 302);
         exit;
     }
@@ -79,38 +97,58 @@ if ($_COOKIE['userEmail']) {
                 <h2 class="dashbord-title">Dashboard</h2>
             </aside>
             <article class="main-right">
-                <div class="users">
-                    <h3>Users</h3>
-                    <a class="addBtn" href="../signup.php?isAdmin=<?= $userFromDB['admin'] ?>">Add new user</a>
-                    <table class="table table-striped ">
-                        <thead class="table table-dark">
-                            <tr py-4>
-                                <th py-4>ID</th>
-                                <th>Username</th>
-                                <th>email</th>
-                                <th>ccreated_at</th>
-                                <th>admin</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($allUsers as $user) : ?>
-                                <tr>
-                                    <td><?= $user['id'] ?></td>
-                                    <td><?= $user['username'] ?></td>
-                                    <td><?= $user['email'] ?></td>
-                                    <td><?= $user['created_at'] ?></td>
-                                    <td><?= $user['admin'] ?></td>
-                                    <td>
-                                        <button type="button" class="btn btn-secondary">Edit</button>
-                                        <form class="d-inline" action="users/delete.php?id=<?= $user['id'] ?>" method="post">
-                                            <button class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </td>
+                <?php if ($_GET['categoryAdded'] || $_GET['userCreated'] || $_GET['userUpdated'] || $_GET['userDeleted']) : ?>
+                    <div class="success-message">
+                        <?= $successMessage ?>
+                    </div>
+                <?php endif ?>
+                <div class="users-categories">
+                    <div class="users">
+                        <h3>Users</h3>
+                        <a class="addBtn" href="../signup.php">Add user</a>
+                        <table class="table table-striped ">
+                            <thead class="table table-dark">
+                                <tr py-4>
+                                    <th py-4>ID</th>
+                                    <th>Username</th>
+                                    <th>email</th>
+                                    <th>created_at</th>
+                                    <th>updated_at</th>
+                                    <th>admin</th>
+                                    <th>Actions</th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($allUsers as $user) : ?>
+                                    <tr>
+                                        <td><?= $user['id'] ?></td>
+                                        <td><?= $user['username'] ?></td>
+                                        <td><?= $user['email'] ?></td>
+                                        <td><?= $user['created_at'] ?></td>
+                                        <td><?= $user['updated_at'] ?></td>
+                                        <td><?= $user['admin'] ?></td>
+                                        <td>
+                                            <form class="d-inline" action="../signup.php?email=<?= $user['email'] ?>&edit=1" method="post">
+                                                <button class="btn btn-secondary">Edit</button>
+                                            </form>
+                                            <form class="d-inline" action="users/delete.php?id=<?= $user['id'] ?>" method="post">
+                                                <button onclick="return confirm('Do you want to delete this user?')" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="categories">
+                        <h3>Categorie</h3>
+                        <a class="addBtn" href="./categories/addCategory.php">Add Categorie</a>
+                    </div>
+                </div>
+
+                <div class="users">
+                    <h3>Produits</h3>
+                    <a class="addBtn" href="../signup.php">Add Product</a>
                 </div>
 
             </article>

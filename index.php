@@ -10,7 +10,6 @@ $userConnected = $_COOKIE['userEmail'];
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Living Rooms</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
@@ -39,24 +38,30 @@ $userConnected = $_COOKIE['userEmail'];
         <?php endif; ?>
         <!-- Change button depend on user connected or not -->
         <?php if (isset($userConnected)) : ?>
-          <a class="login" href="./pages/logout.php">Logout</a>
+          <div class="logout-profil">
+            <img src="./ressources/icons/user.png" alt="" class="icon user-connected">
+            <div class="logout-settings">
+              <a class="login" href="./pages/logout.php">Logout</a>
+              <div class="settings">settings</div>
+            </div>
+          </div>
         <?php else : ?>
           <a href="./pages/signin.php" class="login">login</a>
         <?php endif; ?>
       </div>
     </div>
     <div class="mobile-login-group">
-        <!-- Display signup button if user not login -->
-        <?php if (!isset($userConnected)) : ?>
-          <a class="login" href="./pages/signup.php">Sign up</a>
-        <?php endif; ?>
-        <!-- Change button depend on user connected or not -->
-        <?php if (isset($userConnected)) : ?>
-          <a class="login" href="./pages/logout.php">Logout</a>
-        <?php else : ?>
-          <a href="./pages/signin.php" class="login">login</a>
-        <?php endif; ?>
-      </div>
+      <!-- Display signup button if user not login -->
+      <?php if (!isset($userConnected)) : ?>
+        <a class="login" href="./pages/signup.php">Sign up</a>
+      <?php endif; ?>
+      <!-- Change button depend on user connected or not -->
+      <?php if (isset($userConnected)) : ?>
+        <a class="login" href="./pages/logout.php">Logout</a>
+      <?php else : ?>
+        <a href="./pages/signin.php" class="login">login</a>
+      <?php endif; ?>
+    </div>
     <div class="header-bottom">
       <div class="search-group">
         <div class="">
