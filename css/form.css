@@ -41,7 +41,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 40px;
-
 }
 
 .input-group {
@@ -61,7 +60,7 @@ body {
   border-bottom: 1px solid grey;
 }
 
-.input-group input:focus {
+.input-group input:focus , select{
   border-bottom: 1px solid orange;
 }
 
@@ -108,6 +107,14 @@ a {
   padding-top: 30px;
   align-items: center;
   flex-direction: column;
+}
+
+select {
+  padding: 10px;
+  background-color: white;
+  border: none;
+  font-size: 18px;
+  border-bottom: 1px solid grey;
 }
 
 @media screen and (min-width: 810px) {

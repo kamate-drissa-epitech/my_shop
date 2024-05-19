@@ -251,3 +251,9 @@ table th,
 table td {
   padding: 10px !important;
 }
+
+.min-picture {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+}

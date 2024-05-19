@@ -14,10 +14,10 @@ class productModel
         $this->pdo = $connect->connection();
     }
 
-    public function addProduct($productName, $productPrice, $decription, $picture,$categorie_id)
+    public function addProduct($name, $price, $decription, $picture, $categorie_id)
     {
-        $query = $this->pdo->prepare("INSERT INTO products(name,price,category_id) VALUES (?,?,?)");
-        $query->execute([$productName, $productPrice, $categorie_id]);
+        $query = $this->pdo->prepare("INSERT INTO products(name,price, description,picture, category_id) VALUES (?,?,?,?,?)");
+        $query->execute([$name, $price, $decription, $picture, $categorie_id]);
     }
 
     public function getAllProducts()
@@ -46,6 +46,10 @@ class productModel
         $query->execute([$name]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
-
-
+    public function getProductById($id)
+    {
+        $query = $this->pdo->prepare("SELECT * FROM products WHERE id = ?");
+        $query->execute([$id]);
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
 }

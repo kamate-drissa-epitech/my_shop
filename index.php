@@ -67,7 +67,10 @@ $userConnected = $_COOKIE['userEmail'];
         <div class="">
           <img src="ressources/icons/Search.png" alt="Search icon" class="search-icon" />
         </div>
-        <input type="text" class="search-input" placeholder="living room" />
+        <form action="" method="get" class="search-input">
+          <input type="text" name="keywords" class="search-area" placeholder="living room" />
+          <br />
+        </form>
         <div class="author-infos">
           <div class="author-name">Powerd by Algolia</div>
           <img class="author-logo" src="ressources/icons/Sajari_Logo.png" />
@@ -122,14 +125,19 @@ $userConnected = $_COOKIE['userEmail'];
           <option value="">Fake data</option>
         </select>
         <div class="card-selected-price-range">Price Range</div>
-        <input class="input-range" type="range" min="0" max="100" />
-        <div class="range-values">
-          <div class="range-start range">0</div>
-          <div class="range range-end">10,0000+</div>
+        <div class="range_container">
+          <div class="sliders_control">
+            <input id="fromSlider" type="range" value="10" min="0" max="100" />
+            <input id="toSlider" type="range" value="40" min="0" max="100" />
+            <div class="range-values">
+              <div class="range-start range">0</div>
+              <div class="range range-end">10,0000+</div>
+            </div>
+          </div>
         </div>
-        <div class="circle-container">
+        <!-- <div class="circle-container">
           <div class="circle"></div>
-        </div>
+        </div> -->
       </div>
       <div class="card-container">
         <div>

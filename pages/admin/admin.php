@@ -13,6 +13,7 @@ $successMessage = '';
 
 $allUsers = $user->getALlUsers();
 $allCategories = $category->getAllCategories();
+$allProducts = $product->getAllProducts();
 
 if ($_GET['categoryAdded']) {
     $successMessage = "New category added";
@@ -25,6 +26,9 @@ if ($_GET['userUpdated']) {
 }
 if ($_GET['userDeleted']) {
     $successMessage = "User deleted successfuly";
+}
+if ($_GET['productAdd']) {
+    $successMessage = 'Product added';
 }
 
 
@@ -97,7 +101,7 @@ if ($_COOKIE['userEmail']) {
                 <h2 class="dashbord-title">Dashboard</h2>
             </aside>
             <article class="main-right">
-                <?php if ($_GET['categoryAdded'] || $_GET['userCreated'] || $_GET['userUpdated'] || $_GET['userDeleted']) : ?>
+                <?php if ($_GET['categoryAdded'] || $_GET['userCreated'] || $_GET['userUpdated'] || $_GET['userDeleted'] || $_GET['productAdd']) : ?>
                     <div class="success-message">
                         <?= $successMessage ?>
                     </div>
@@ -148,7 +152,39 @@ if ($_COOKIE['userEmail']) {
 
                 <div class="users">
                     <h3>Produits</h3>
-                    <a class="addBtn" href="../signup.php">Add Product</a>
+                    <a class="addBtn" href="./products/addProduct.php">Add Product</a>
+                    <table class="table table-striped ">
+                        <thead class="table table-dark">
+                            <tr py-4>
+
+                                <th>name</th>
+                                <th>price</th>
+                                <th>description</th>
+                                <th>min picture</th>
+                                <th>category id</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($allProducts as $product) : ?>
+                                <tr>
+                                    <td><?= $product['name'] ?></td>
+                                    <td><?= $product['price'] ?> $</td>
+                                    <td><?= $product['description'] ?></td>
+                                    <td><img class="min-picture" src="<?= $product['picture'] ?>" alt=""></td>
+                                    <td><?= $product['category_id'] ?></td>
+                                    <td>
+                                        <form class="d-inline" action="products/addProduct.php?id=<?= $product['id'] ?>&edit=1" method="post">
+                                            <button class="btn btn-secondary">Edit</button>
+                                        </form>
+                                        <form class="d-inline" action="products/delete.php?id=<?= $product['id'] ?>" method="post">
+                                            <button onclick="return confirm('Do you want to delete this product?')" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
 
             </article>
