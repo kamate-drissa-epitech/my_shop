@@ -82,4 +82,4 @@ FONCTIONNALITES SEARCH BAR
 1- On doit pouvoir rechercher un produit par categorie, nom, prix et les afficher
 
 2- Les recherches peuvent se faire par intervalle, ect....
-===============================================================================
+==============================================================================
